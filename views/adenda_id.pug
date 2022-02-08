@@ -1,0 +1,163 @@
+extends layout 
+
+block content
+    h1= title
+    if adenda.chassis == 0
+        h3 No existen adendas para el chassis indicado - #{buscado.chassis}
+    else
+        H3
+            ins(style="color: #FF0000") CONTRATO DE VENTA 
+        br
+        container.fluid
+            container
+                .row.justify-content-md-center
+                    .col-lg-3
+                        H6 NRO.: #{adenda.nro_ventas} / #{adenda.fec_vta_0km.getFullYear()}
+                    .col-lg-3
+                        H6 #{adenda.abrev_deposito}
+                    .col-lg-3
+                        H6 CIUDAD: #{adenda.ct_deposito.ct_sitio.nom_sitio}
+                    .col-lg-3
+                        H6 FECHA: #{adenda.fec_vta_0km.getDate()+1}/#{adenda.fec_vta_0km.getMonth()+1}/#{adenda.fec_vta_0km.getFullYear()}
+            hr
+            h4(style="color: #FF0000") DATOS PERSONALES DEL CLIENTE
+            container
+                .row
+                    .col.col-lg-8
+                        H7.fw-bold Nombre Completo: 
+                        H7 #{contrato.cpp_mantit.nom_tit}
+                    .col-lg-2
+                        H7.fw-bold NIT:
+                        H7 #{adenda.nro_doc_uni}
+                .row 
+                    .col-auto
+                        h7.fw-bold C.I.: 
+                        h7 #{adenda.cod_tit}
+                .row 
+                    .col-auto
+                        h7.fw-bold Direccion: 
+                        h7 #{contrato.cpp_mantit.dir_particular}
+                .row 
+                    .col-lg-3
+                        h7.fw-bold Telefono: 
+                        h7 #{contrato.cpp_mantit.tel_particular}
+                    .col-lg-3
+                        h7.fw-bold Celular: 
+                        h7 #{contrato.cpp_mantit.tel_celular}
+                    .col-lg-3
+                        h7.fw-bold Email: 
+                        h7 #{contrato.cpp_mantit.email_tit}
+            hr
+            h4(style="color: #FF0000") DESCRIPCION DEL VEHICULO
+            container
+                .row
+                    .col.col-lg-4
+                        H7.fw-bold Modelo: 
+                        H7.fw-bold #{adenda.ct_vehiculo.cod_modelo}
+                    .col-lg-2
+                        H7.fw-bold A&ntilde;o: 
+                        H7.fw-bold #{adenda.ct_vehiculo.año_modelo}
+                .row 
+                    .col-md-4
+                        h7.fw-bold Chasis: 
+                        h7.fw-bold #{adenda.chassis_aux1}
+                    .col-md-4
+                        h7.fw-bold Motor: 
+                        h7.fw-bold #{adenda.nro_motor2}
+                .row 
+                    .col-4
+                        h7.fw-bold Color: 
+                        h7.fw-bold #{adenda.nom_color2}
+                    .col-4
+                        h7.fw-bold Marca: 
+                        h7.fw-bold #{adenda.ct_vehiculo.ct_marca.nom_marca}
+                .row 
+                    .col-lg-4
+                        h7.fw-bold Otros: 
+                        h7.fw-bold #{adenda.nom_modelo2}
+                    .col-4
+                        h7.fw-bold Master: 
+                        h7.fw-bold #{adenda.ct_vehiculo.cod_master}
+                    .col-4
+                        h7.fw-bold Transmision: 
+                        if adenda.ct_vehiculo.tipo_caja == 'M'
+                            h7.fw-bold Mec&aacute;nico 
+                        else if adenda.ct_vehiculo.tipo_caja == 'A'
+                            h7.fw-bold Autom&aacute;tico 
+                        else
+                            h7.fw-bold CVT
+            hr
+            h4(style="color: #FF0000") CONDICIONES Y OPCIONES DE VENTA
+            container
+                .row
+                    .col.col-lg-3
+                        H7.fw-bold Moneda: 
+                        if adenda.cod_moneda == 2
+                            h7.fw-bold Dolares 
+                        else
+                            h7.fw-bold Bolivianos
+                    .col-lg-3
+                        H7.fw-bold Forma de Pago: 
+                        H7.fw-bold #{contrato.observacionesp}
+                .row 
+                    .col-lg-3
+                        h7.fw-bold Monto Total: 
+                        h7.fw-bold #{adenda.precio}
+                    .col-lg-6
+                        h7.fw-bold #{adenda.precioLiteral}
+                    .col-lg-3
+                        if adenda.cod_moneda == 2
+                            h7.fw-bold Dolares 
+                        else
+                            h7.fw-bold Bolivianos
+                .row
+                    .col-lg-3
+                        h7.fw-bold Cuota Inicial: 
+                        h7.fw-bold #{adenda.conversion}
+                    .col-lg-6
+                        h7.fw-bold #{adenda.conversionLiteral}
+                    .col-lg-3
+                        if adenda.cod_moneda == 2
+                            h7.fw-bold Dolares 
+                        else
+                            h7.fw-bold Bolivianos
+                .row
+                    .col-lg-3
+                        h7.fw-bold Saldo: 
+                        h7.fw-bold #{adenda.saldo}
+                    .col-lg-6
+                        h7.fw-bold #{adenda.saldoLiteral}
+                    .col-lg-3
+                        if adenda.cod_moneda == 2
+                            h7.fw-bold Dolares 
+                        else
+                            h7.fw-bold Bolivianos
+                .row 
+                    .col-lg-4
+                        h7.fw-bold Seguro: 
+                        h7.fw-bold #{contrato.tipo_documento}
+                    .col-lg-4
+                        h7.fw-bold Venta CIF Zona Franca: 
+                        h7.fw-bold #{contrato.tipo_doc}
+            hr
+            h4(style="color: #FF0000") OPCIONALES CONTEMPLADOS EN EL PRECIO:
+            container
+                each accesorio, i in accesorios   
+                    h7.fw-bold - #{accesorio.descripcion}
+                    br
+        br
+        p.fs-10.fw-lighter Ejecutivo(a): #{adenda.ct_vendedore.nom_vendedor}
+        hr
+        container
+                .row
+                    .col-lg-4
+                        form(method='POST', action='/adenda/repadenda/'+adenda.chassis_aux1, target="_blank")
+                            button.btn.col-6.btn-outline-primary(type='submit') Adenda
+                    .col-lg-4
+                        form(method='POST', action='/adenda/rephdd/'+adenda.chassis_aux1, target="_blank")
+                            button.btn.col-6.btn-outline-primary(type='submit') Hoja de Descuento
+                    .col-lg-4
+                        form(method='POST', action='/adenda/repotu/'+adenda.chassis_aux1, target="_blank")
+                            button.btn.col-6.btn-outline-primary(type='submit') Check List-OTU
+        
+                     

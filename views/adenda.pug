@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+    h1 Reporte de Adenda
+    br
+    form.row.g-3.needs-validation(novalidate='',method='POST', action='/adenda')
+        .col-md-6
+            label.form-label(for='validationCustom01') Chassis:
+            input#validationCustom01.form-control(name='chassis', type='text', required)
+            .invalid-feedback
+                | Ingrese el Chassis
+            button.btn.btn-primary(type='submit') Aceptar!

@@ -1,0 +1,33 @@
+doctype html 
+html 
+    head 
+        title #{title}
+        link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.css')
+        link(rel='stylesheet' href='/css/style.css')
+    body
+        .container
+            nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+                .container-fluid
+                    a.navbar-brand(href='/adenda')
+                        img(src='/img/supra_icon.png' alt='icono' width='40' height='40')
+                        |    Supra Kore
+                    button.navbar-toggler(type='button' data-bs-toggle='collapse' data-bs-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation')
+                        span.navbar-toggler-icon
+                    #navbarNav.collapse.navbar-collapse
+                        ul.navbar-nav
+                            li.nav-item
+                                a.nav-link.disabled(href='/view') Articles
+                            li.nav-item
+                                a.nav-link.disabled(href='/view/add') Add
+                            li.nav-item
+                                a.nav-link(href='/adenda/') Adenda
+        .container 
+            block content
+            br
+            hr
+            footer 
+                p Copyright &copy; 2021
+        script(src='/bower_components/jquery/dist/jquery.js')  
+        script(src='/bower_components/bootstrap/dist/js/bootstrap.js')
+        script(src='/js/main.js')
+        script(src='//cdn.jsdelivr.net/npm/sweetalert2@11')

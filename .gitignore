@@ -1,0 +1,8 @@
+bootstrap
+jquery
+node_modules
+.env
+Dockerfile
+.dockerignore
+*.pem
+*.pdf

@@ -1,0 +1,22 @@
+extends layout 
+
+block content 
+    h1 #{title}
+    form.row.g-3.needs-validation(novalidate='',method='POST', action='/view/add')
+        .col-md-6
+            label.form-label(for='validationCustom01') Title:
+            input#validationCustom01.form-control(name='title', type='text', required)
+            .invalid-feedback
+                | Ingrese Titulo!
+        .col-md-6
+            label.form-label(for='validationCustom02') Author:
+            input#validationCustom02.form-control(name='author', type='text', required)
+            .invalid-feedback
+                | Ingrese Autor!
+        .col-md-12
+            label.form-label(for='validationCustom03') Body:
+            textarea#validationCustom03.form-control(name='body', required)
+            .invalid-feedback
+                | Please llene una descripcion.
+            br
+            button.btn.btn-primary(type='submit') Submit!
