@@ -2,7 +2,7 @@
 const express  = require('express');
 const app = express();
 const server = require('http').Server(app);
-const passport = require('passport');
+//const passport = require('passport');
 
 const path = require('path');
 
@@ -19,10 +19,10 @@ db(config.dbUrl);
 db2(config.dbUrl2);
 
 // Pass the global passport object into the configuration function
-require('./config/passport')(passport);
+//require('./config/passport')(passport);
 
 // This will initialize the passport object on every request
-app.use(passport.initialize());
+//app.use(passport.initialize());
 
 // instead of using body-parser middleware, use the new Express implementation of the same thing
 app.use(express.json());
