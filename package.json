@@ -5,8 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "dev": "nodemon app",
-    "postinstall": "bower install"
+    "dev": "nodemon app"
   },
   "author": "Christian Cuevas",
   "license": "MIT",
