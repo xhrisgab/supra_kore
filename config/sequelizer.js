@@ -27,6 +27,12 @@ const db2 = {};
 db2.Sequelize = Sequelize;
 db2.sequelize = sequelize;
 
+//Modelos para Cotizador
+db2.cotizador = require('../components/cotizador/model')(sequelize,Sequelize);
+db2.cotAccesorio = require('../components/cotizador/CotizadorAccesorio/model')(sequelize,Sequelize);
+db2.cpf_detxitem = require('../components/cotizador/cpf_detxitem/model')(sequelize,Sequelize);
+
+//Modelos para Adenda
 db2.adenda = require('../components/teros/adendas/model')(sequelize, Sequelize);
 db2.ct_vehiculo = require('../components/teros/ct_vehiculos/model')(sequelize, Sequelize);
 db2.marca = require('../components/teros/ct_marca/model')(sequelize, Sequelize);
@@ -40,7 +46,13 @@ db2.vendedor = require('../components/teros/ct_vendedores/model')(sequelize, Seq
 db2.modelo = require('../components/teros/ct_modelos/model')(sequelize, Sequelize);
 db2.segmento = require('../components/teros/ct_segmentos/model')(sequelize, Sequelize);
 
+//*** RELACIONES PARA COTIZADOR ***//
+db2.cotAccesorio.hasMany(db2.cpf_detxitem,{
+    sourceKey: 'codModelo',
+    foreignKey: 'cod_modelo',
+});
 
+//*** RELACIONES PARA ADENDAS ***//
 //Relacion adenda -> vehiculos
 db2.adenda.hasOne(db2.ct_vehiculo, {
     sourceKey: 'chassis_aux1',
