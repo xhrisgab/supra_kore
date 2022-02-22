@@ -1,0 +1,12 @@
+extends layout 
+
+block content
+    h1 Reporte de Cotizacion 
+    br
+    form.row.g-3.needs-validation(novalidate='',method='POST', action='/cotizador', target="_blank")
+        .col-md-6
+            label.form-label(for='validationCustom01') Numero de Proforma:
+            input#validationCustom01.form-control(name='id', type='text', required)
+            .invalid-feedback
+                | Ingrese el Numero de la Cotizacion
+            button.btn.btn-primary(type='submit') Aceptar!
