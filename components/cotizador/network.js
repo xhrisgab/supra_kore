@@ -6,13 +6,14 @@ const fs = require('fs');
 
 const router = express.Router();
 
+/*
 router.get('/', function(req, res){
 
     res.render('proforma', {
         title: 'Reporte de Proforma',
     })
 })
-
+*/
 router.post('/',function(req, res){
     console.log(req.body.id);
     controller.reporteCotizador(req.body.id)
