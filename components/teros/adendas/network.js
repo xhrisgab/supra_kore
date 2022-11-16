@@ -86,4 +86,53 @@ router.post('/repotu/:chassis',function(req, res){
         })
 })
 
+
+router.post('/repcontrato',function(req, res){
+    controller.reportePdf(req.body.chassis)
+        .then((x)=>{
+            res.download('public/temp.pdf',function(err){
+            console.log("Error: ", err);
+        })
+    })
+        .catch(err=> {
+            console.error('[Error] Error Adenda', err);
+            res.render('error',{
+                title: 'ERROR',
+                err: err
+            })
+        })
+})
+
+router.post('/repotu',function(req, res){
+    controller.reportOTU(req.body.chassis)
+        .then((x)=>{
+            res.download('public/otu.pdf',function(err){
+            console.log("Error: ", err);
+        })
+    })
+        .catch(err=> {
+            console.error('[Error] Error Adenda', err);
+            res.render('error',{
+                title: 'ERROR',
+                err: err
+            })
+        })
+})
+
+router.post('/rephdd',function(req, res){
+    controller.reportHHD(req.body.chassis)
+        .then((x)=>{
+            res.download('public/hdd.pdf',function(err){
+            console.log("Error: ", err);
+        })
+    })
+        .catch(err=> {
+            console.error('[Error] Error Adenda', err);
+            res.render('error',{
+                title: 'ERROR',
+                err: err
+            })
+        })
+})
+
 module.exports = router;
